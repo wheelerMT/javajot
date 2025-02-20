@@ -1,10 +1,15 @@
-import { Controller, Get, Post } from '@nestjs/common';
+import { Controller, Get, Param, Post } from '@nestjs/common';
 
 @Controller('coffee')
 export class CoffeeController {
   @Get()
   findAll(): string {
     return 'This action returns all coffee';
+  }
+
+  @Get(':id')
+  find(@Param('id') id: string): string {
+    return `This action returns a #${id} coffee`
   }
 
   @Post()
