@@ -1,7 +1,11 @@
-import { Controller, Get, Param, Post } from '@nestjs/common';
+import { Body, Controller, Get, Param, Post } from '@nestjs/common';
+import { CoffeeService } from './coffee.service';
+import { CreateCoffeeDto } from './dto/create-coffee.dto';
 
 @Controller('coffee')
 export class CoffeeController {
+  constructor(private coffeeService: CoffeeService) { }
+
   @Get()
   findAll(): string {
     return 'This action returns all coffee';
@@ -13,7 +17,7 @@ export class CoffeeController {
   }
 
   @Post()
-  create(): string {
-    return 'This action adds a new coffee';
+  create(@Body() createCoffeeDto: CreateCoffeeDto) {
+    this.coffeeService.create(createCoffeeDto);
   }
 }
